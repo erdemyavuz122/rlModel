@@ -133,7 +133,7 @@ class RRTPlanner:
             if not self._check_collision(new_node, self.obstacles):
                 self.node_list.append(new_node)
 
-                # 5. Hedefe ulaştık mı?
+
                 dx = new_node.x - goal_node.x
                 dy = new_node.y - goal_node.y
                 if math.sqrt(dx ** 2 + dy ** 2) <= self.step_size:
@@ -148,8 +148,7 @@ class RRTPlanner:
         return node_list[minind]
 
     def _check_collision(self, node, obstacles):
-        # Sadece noktanın engele girip girmediğine bakıyoruz (Basitleştirilmiş RRT)
-        # Daha gelişmiş versiyonlarda çizginin tamamı kontrol edilir.
+
         for obs in obstacles:
             dx = node.x - obs[0]
             dy = node.y - obs[1]

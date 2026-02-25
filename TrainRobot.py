@@ -16,7 +16,6 @@ if __name__ == "__main__":
 
     # 3. Checkpoint (Yedekleme) Ayarları
     # Her 100.000 adımda bir modeli 'robot_checkpoints' klasörüne kaydeder.
-    # Bilgisayar kapansa bile en son kaydedilen adımdan test yapabilirsiniz.
     checkpoint_callback = CheckpointCallback(
         save_freq=100000,
         save_path=checkpoint_dir,

@@ -6,7 +6,7 @@ from classic_planners import AStarPlanner, RRTPlanner
 
 
 def calculate_path_length(path):
-    """Bir rotanın toplam uzunluğunu hesaplar"""
+
     length = 0
     for i in range(len(path) - 1):
         p1 = np.array(path[i])
@@ -16,7 +16,7 @@ def calculate_path_length(path):
 
 
 if __name__ == "__main__":
-    # 1. Ortamı Hazırla (Eğitimdeki parametrelerle aynı)
+
     env = MobileRobotEnv(grid_size=10.0, num_obstacles=5)
     obs, info = env.reset()  # Rastgele bir harita oluştur
 
@@ -42,7 +42,6 @@ if __name__ == "__main__":
 
     # --- 4. YAPAY ZEKA: PPO (RL AGENT) ---
     print("PPO Ajanı Yükleniyor...")
-    # Checkpoint yolunuzu buraya yazın (veya final modeli)
     model_path = "./robot_checkpoints/ppo_model_1200000_steps"
     model = PPO.load(model_path)
 

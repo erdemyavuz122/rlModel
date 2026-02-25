@@ -66,10 +66,10 @@ class MobileRobotEnv(gym.Env):
                 dist_to_robot = np.linalg.norm(obs_pos - self.robot_pos)
                 dist_to_goal = np.linalg.norm(obs_pos - self.goal_pos)
 
-                # YENİ: Engellerin birbirinin üstüne binmesini engelle
+
                 overlap = False
                 for existing_obs in self.obstacles:
-                    # İki engelin merkezleri arasındaki mesafe, çaplarından büyük olmalı (ufak bir pay ile)
+                    # İki engelin merkezleri arasındaki mesafe, çaplarından büyük olmalı
                     if np.linalg.norm(obs_pos - existing_obs) < (self.obstacle_radius * 2 + 0.1):
                         overlap = True
                         break
@@ -167,9 +167,9 @@ class MobileRobotEnv(gym.Env):
     def render(self):
         if self.fig is None:
             plt.ion()
-            # Daha şık bir figür oranı ve zemin rengi
+
             self.fig, self.ax = plt.subplots(figsize=(7, 7))
-            self.fig.patch.set_facecolor('#2C3E50')  # Çerçeve rengi (Koyu)
+            self.fig.patch.set_facecolor('#2C3E50')
 
         self.ax.clear()
         self.ax.set_xlim(0, self.grid_size)
@@ -179,21 +179,21 @@ class MobileRobotEnv(gym.Env):
         self.ax.grid(False)
         self.ax.set_xticks([])
         self.ax.set_yticks([])
-        self.ax.set_facecolor('#BDC3C7')  # Zemin rengi (Beton grisi)
+        self.ax.set_facecolor('#BDC3C7')
 
-        # Hedef Bölgesi (Açık yeşil, yarı saydam bir iniş/varış bölgesi)
+
         goal_zone = plt.Circle((self.goal_pos[0], self.goal_pos[1]), self.goal_radius, color='#2ECC71', alpha=0.6,
                                zorder=2)
         self.ax.add_patch(goal_zone)
         # Hedefin tam ortasına küçük bir işaret (X)
         self.ax.plot(self.goal_pos[0], self.goal_pos[1], marker='X', color='white', markersize=8, zorder=3)
 
-        # Engeller (Siyah/Koyu gri kalın sütunlar)
+
         for obs in self.obstacles:
             pillar = plt.Circle((obs[0], obs[1]), self.obstacle_radius, color='#34495E', ec='black', lw=2, zorder=3)
             self.ax.add_patch(pillar)
 
-        # Sensör Işınları (Lazer gibi açık mavi)
+
         sensors = self._get_sensor_readings()
         angles = np.linspace(-np.pi, np.pi, self.num_sensors, endpoint=False)
         for i, angle in enumerate(angles):
@@ -203,7 +203,7 @@ class MobileRobotEnv(gym.Env):
             self.ax.plot([self.robot_pos[0], end_x], [self.robot_pos[1], end_y], color='#3498DB', linestyle='-',
                          linewidth=1.5, alpha=0.4, zorder=1)
 
-        # Robot (Turuncu gövde ve belirgin yön çizgisi)
+
         robot_body = plt.Circle((self.robot_pos[0], self.robot_pos[1]), 0.3, color='#E67E22', ec='black', lw=1.5,
                                 zorder=4)
         self.ax.add_patch(robot_body)
